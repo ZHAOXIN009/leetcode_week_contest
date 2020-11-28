@@ -1,0 +1,26 @@
+```
+class Solution {
+public:
+    int maxRepeating(string sequence, string word) {
+        int res=0;
+        int n=word.size();
+        int curr=0;
+        string currstring;
+        while(curr*n<=sequence.size()){
+            currstring+=word;
+            if(check(sequence, currstring)){
+                curr++;
+                res=curr;
+            }
+            else{
+                return curr;
+            }
+        }
+        return res;
+    }
+    
+    bool check(string sequence, string word){
+        return sequence.find(word)!=string::npos;
+    }
+};
+```
