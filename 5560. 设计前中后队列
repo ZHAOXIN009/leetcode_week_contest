@@ -1,0 +1,103 @@
+```
+class FrontMiddleBackQueue {
+public:
+    deque<int>de1,de2;
+    FrontMiddleBackQueue() {
+
+    }
+    
+    void pushFront(int val) {
+        de1.push_front(val);
+        int m=de1.size();
+        int n=de2.size();
+        if(m>n){
+            int temp=de1.back();
+            de1.pop_back();
+            de2.push_front(temp);
+        }
+    }
+    
+    void pushMiddle(int val) {
+        int m=de1.size();
+        int n=de2.size();
+        if(m<n){
+            de1.push_back(val);
+        }
+        else{
+            de2.push_front(val);
+        }
+    }
+    
+    void pushBack(int val) {
+        de2.push_back(val);
+        int m=de1.size();
+        int n=de2.size();
+        if(n>m+1){
+            int temp=de2.front();
+            de2.pop_front();
+            de1.push_back(temp);
+        }
+    }
+    
+    int popFront() {
+        if(de1.size()==0){
+            if(de2.size()==0){
+                return -1;
+            }
+            else{
+                int res=de2.front();
+                de2.pop_front();
+                return res;
+            }
+        }
+        else{
+            int res=de1.front();
+            de1.pop_front();
+            int m=de1.size();
+            int n=de2.size();
+            if(n>m+1){
+                int temp=de2.front();
+                de2.pop_front();
+                de1.push_back(temp);
+            }
+            return res;
+        }
+    }
+    
+    int popMiddle() {
+        int m=de1.size();
+        int n=de2.size();
+        if(m==0&&n==0)return -1;
+        
+        if(m<n){
+            int res=de2.front();
+            de2.pop_front();
+            return res;
+        }
+        else{
+            int res=de1.back();
+            de1.pop_back();
+            return res;
+        }
+    }
+    
+    int popBack() {
+        if(de2.size()==0){
+            return -1;
+        }
+        int res=de2.back();
+        de2.pop_back();
+        int m=de1.size();
+        int n=de2.size();
+        if(m>n){
+            int temp=de1.back();
+            de1.pop_back();
+            de2.push_front(temp);
+        }
+        return res;
+        
+    }
+};
+
+
+ ```
