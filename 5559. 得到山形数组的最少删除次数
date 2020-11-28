@@ -1,0 +1,37 @@
+```
+class Solution {
+public:
+    int minimumMountainRemovals(vector<int>& nums) {
+        vector<int>left(nums.size(), 1), right(nums.size(), 1);
+        int res=nums.size();
+        for(int i=0; i<nums.size(); ++i){
+            for(int j=0; j<i; ++j){
+                if(nums[i]>nums[j]){
+                    left[i]=max(left[i], left[j]+1);
+                }
+            }
+        }
+        for(int i=nums.size()-1; i>=0; --i){
+            for(int j=nums.size()-1; j>i; --j){
+                if(nums[i]>nums[j]){
+                    right[i]=max(right[i], right[j]+1);
+                }
+            }
+        }
+        for(int i=1; i<nums.size()-1; ++i){
+            int leftnum=leftcheck(nums, i, left);
+            int rightnum=rightcheck(nums, i, right);
+            int temp=nums.size()-leftnum-rightnum-1;
+            res=min(res, temp);
+        }
+        return res;
+    }
+    
+    int leftcheck(vector<int>& nums, int i, vector<int>&left){
+        return left[i]-1;
+    }
+    int rightcheck(vector<int>& nums, int i, vector<int>&right){
+        return right[i]-1;
+    }
+};
+```
