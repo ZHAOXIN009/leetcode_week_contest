@@ -1,0 +1,32 @@
+```
+ */
+class Solution {
+public:
+    ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
+        int fast=0;
+        ListNode*pre=new ListNode(0);
+        ListNode*prehead=pre;
+        pre->next=list1;
+        ListNode*secondhead=list1;
+        while(fast!=a){
+            fast++;
+            pre=pre->next;
+        }
+        ListNode*first_tail=pre;
+        while(fast!=b+1){
+            fast++;
+            pre=pre->next;
+        }
+        secondhead=pre->next;
+        ListNode*curr=list2;
+        while(curr->next){
+            curr=curr->next;
+        }
+        first_tail->next=list2;
+        curr->next=secondhead;
+        
+        return prehead->next;
+        
+    }
+};
+```
